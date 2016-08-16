@@ -33,9 +33,9 @@ def parse_data(apps, schema_editor):
         reader = csv.reader(ratings, delimiter='+')
         for row in reader:
             dt = datetime.datetime.fromtimestamp(float(row[3]))
-            temp = Rating(rater=rater_dict[int(row[0])], movie=movie_dict[int(row[1])], rating=int(row[2]), timestamp=dt)
-            # Save below should be siginificantly faster
-            # temp = Rating(rater_id=int(row[0]), movie_id=int(row[1]), rating=int(row[2]), timestamp=dt)
+            # temp = Rating(rater=rater_dict[int(row[0])], movie=movie_dict[int(row[1])], rating=int(row[2]), timestamp=dt)
+            # Save below should be siginificantly faster, it wasn't
+            temp = Rating(rater_id=int(row[0]), movie_id=int(row[1]), rating=int(row[2]), timestamp=dt)
             temp.save()
 
 
