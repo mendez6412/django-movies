@@ -11,7 +11,7 @@ class Movie(models.Model):
         return self.title
 
 
-class Raters(models.Model):
+class Rater(models.Model):
     OCCUPATIONS = (
         (0, "other"), (1, "academic/educator"),
         (2, "artist"), (3, "clerical/admin"),
@@ -27,7 +27,7 @@ class Raters(models.Model):
     age = models.IntegerField()
     occupation = models.IntegerField(choices=OCCUPATIONS)
     zipcode = models.CharField(max_length=20)
-    user = models.OneToOneField('User', on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 
 
 class Rating(models.Model):
