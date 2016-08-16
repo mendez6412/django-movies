@@ -1,0 +1,5 @@
+.DS_Store
+.envrc
+*.pyc
+__pycache__/
+secrets.py
