@@ -3,9 +3,22 @@ from .models import Movie, Rater, Rating
 from django.db.models import Avg, Count
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
+from django.db import connection
 
 
 def index(request):
+    """ SQL Magic, current clock @ ~600ms... so not quite Google time """
+    # T: ASK ME TO EXPLAIN
+    # cur = connection.cursor()
+    # cur.execute('SELECT movie_id, AVG(rating) as a FROM flix_rating GROUP BY movie_id HAVING COUNT (movie_id) > 20ORDER BY a DESC;')
+    # top20 = cur.fetchmany(20)
+    # temp = []
+    # for item in top20:
+    #    movie = Movie.objects.get(id=item[0])
+    #    temp.append((movie.id, movie.title, item[1]))
+    # context = {'top20': temp}
+
+    # Let's talk about why .aggregate won't work well here
     # average = Movie.objects.aggergate(Avg('rating__rating'))
     # movie = Movie.objects.all()
     # context = {
@@ -13,10 +26,12 @@ def index(request):
     #     'movie': movie,
     # }
     # return render(request, 'flix/index.html', context)
-    return HttpResponse('your at the index')
+    # return HttpResponse('you are at the index')
 
 
 def movie(request, movie_id):
+    # someone explain get_or_404 to me(Tommy) tomorrow
+    # someone explain why you don't need to int(movie_id), as pk is an int
     movie = get_object_or_404(Movie, pk=movie_id)
     context = {
         'movie': movie,
@@ -40,14 +55,22 @@ def signin(request):
         if user is not None:
             login(request, user)
             # Where should we sent the user?
+            # T: good question, probably their own profile page or the index
     else:
-        return render()  # where should we send them here? help
+        # return render()  # where should we send them here? help
+        return render(request, "flix/login.html", {})
+        # T: good question, probably the index
 
 
 def signout(request):
     logout(request)
     return render(request, 'flix/logout.html')
+    # Just FYI, flix/logout.html should be a "SUCCESS" page
+    # Meaning something like "Yes, you logged out."
 
 
 def register(request):
     pass
+    # Here we need 2 forms, a USER CREATION FORM and a RATER CREATION FORM
+    # I'll leave this for tomorrow, but it's important and we should all
+    # look at this.  -t

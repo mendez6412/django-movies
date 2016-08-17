@@ -1,0 +1,7 @@
+<h3> Top 20 Movies </h3>
+<ol>
+<!-- We can use ID to link to the movie's detailed page -->
+{% for id, title, rating in top20 %}
+  <li>({{ id }}) {{ title }}: {{ rating }}</li>
+{% endfor %}
+</ol>
