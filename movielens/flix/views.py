@@ -7,16 +7,18 @@ from django.db import connection
 
 
 def index(request):
+    # look @ .values_list
+    # django debug toolbar, extensions, ODO
     """ SQL Magic, current clock @ ~600ms... so not quite Google time """
     # T: ASK ME TO EXPLAIN
-    # cur = connection.cursor()
-    # cur.execute('SELECT movie_id, AVG(rating) as a FROM flix_rating GROUP BY movie_id HAVING COUNT (movie_id) > 20ORDER BY a DESC;')
-    # top20 = cur.fetchmany(20)
-    # temp = []
-    # for item in top20:
-    #    movie = Movie.objects.get(id=item[0])
-    #    temp.append((movie.id, movie.title, item[1]))
-    # context = {'top20': temp}
+    cur = connection.cursor()
+    cur.execute('SELECT movie_id, AVG(rating) as a FROM flix_rating GROUP BY movie_id HAVING COUNT (movie_id) > 20ORDER BY a DESC;')
+    top20 = cur.fetchmany(20)
+    temp = []
+    for item in top20:
+       movie = Movie.objects.get(id=item[0])
+       temp.append((movie.id, movie.title, round(item[1], 2)))
+    context = {'top20': temp}
 
     # Let's talk about why .aggregate won't work well here
     # average = Movie.objects.aggergate(Avg('rating__rating'))
@@ -25,7 +27,7 @@ def index(request):
     #     'average': average,
     #     'movie': movie,
     # }
-    # return render(request, 'flix/index.html', context)
+    return render(request, 'flix/index.html', context)
     # return HttpResponse('you are at the index')
 
 
@@ -56,6 +58,7 @@ def signin(request):
             login(request, user)
             # Where should we sent the user?
             # T: good question, probably their own profile page or the index
+            return render(request, "flix/rater/{}".format(user.id), {})
     else:
         # return render()  # where should we send them here? help
         return render(request, "flix/login.html", {})
