@@ -35,16 +35,26 @@ def movie(request, movie_id):
     # someone explain get_or_404 to me(Tommy) tomorrow
     # someone explain why you don't need to int(movie_id), as pk is an int
     movie = get_object_or_404(Movie, pk=movie_id)
+    ratings = Rating.objects.filter(movie_id=movie.id)
+    avg_rating = movie.rating_set.aggergate(Avg('rating'))
     context = {
         'movie': movie,
+        'ratings': ratings,
+        'avg_rating': avg_rating
     }
     return render(request, 'flix/movie.html', context)
 
 
 def rater(request, rater_id):
     rater = get_object_or_404(Rater, pk=rater_id)
+    ratings = Rating.objects.filter(rater_id=rater_id)
+    movies_rated = []
+    for movie in ratings:
+        title = Movie.objects.get(id=movie.movie_id)
+        movies_rated.append((title, movie.movie_id, movie.rating))
     context = {
         'rater': rater,
+        'movies_rated': movies_rated
     }
     return render(request, 'flix/rater.html', context)
 
