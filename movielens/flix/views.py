@@ -5,6 +5,8 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.db import connection
 from .moresecrets import youtube_search
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 def index(request):
     # look @ .values_list
@@ -58,7 +60,7 @@ def signin(request):
             login(request, user)
             # Where should we sent the user?
             # T: good question, probably their own profile page or the index
-            return render(request, "flix/rater/{}".format(user.id), {})
+            return HttpResponseRedirect(reverse(rater, args=[request.user.id]))
     else:
         return render(request, "flix/login.html", {})
 

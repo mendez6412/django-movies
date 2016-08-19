@@ -1,7 +1,7 @@
 {% extends 'flix/base.html' %}
 {% block body %}
 <div class="col-md-12">
-<h3>{{ rater }}</h3>
+<h3>{{ rater.user.username }}</h3>
 <ul>
   <li>Gender: {{ rater.gender }}</li>
   <li>Occupation: {{ rater.occupation }}</li>
