@@ -102,6 +102,9 @@ def get_new_rating(request, movie_id):
                 new_rating.rater_id = request.user.id
                 new_rating.movie_id = movie_id
                 return HttpResponseRedirect('/')
+        else:
+            context = {'rating_form': rating_form}
+            return render(request, 'flix/rating.html', context)
     else:
         return HttpResponseRedirect('/register/')
 
