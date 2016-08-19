@@ -1,16 +1,19 @@
-<!-- I'm not really sure what the ACTION below is doing... -->
-<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
-
-{% csrf_token %}
-<table>
-<tr>
-    <td>Username {{ username }}</td>
-</tr>
-<tr>
-    <td>Password {{ password }}</td>
-</tr>
-<tr>
-    <button name="button">Submit</button>
-</tr>
-</table>
+{% extends 'flix/base.html' %}
+{% block body %}
+<form method="post" action="">
+  {% csrf_token %}
+  <div class="row">
+  <div class="col-sm-3">
+  <div class="form-group">
+    <label for="username">User Name:</label>
+    <input class="form-control" id="username" name="username">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" id="pwd" name="password">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</div>
+</div>
 </form>
+{% endblock %}
