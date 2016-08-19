@@ -24,7 +24,7 @@ def index(request):
 def movie(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
     ratings = Rating.objects.filter(movie_id=movie.id)
-    avg_rating = movie.rating_set.aggergate(Avg('rating'))
+    avg_rating = round(movie.rating_set.aggregate(Avg('rating'))['rating__avg'], 2)
     context = {
         'movie': movie,
         'ratings': ratings,

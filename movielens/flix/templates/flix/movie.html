@@ -1,0 +1,14 @@
+{% extends 'flix/base.html' %}
+{% block body %}
+<div class="col-md-12">
+<h3>{{ movie.title }}</h3>
+Average Rating: {{ avg_rating }}
+</div>
+
+<ul>
+  {% for rating in ratings %}
+  <li><a href="/rater/{{ rating.rater_id }}">User: {{ rating.rater_id }}</a>: {{ rating.rating }}</li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

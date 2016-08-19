@@ -1,0 +1,17 @@
+{% extends 'flix/base.html' %}
+{% block body %}
+<div class="col-md-12">
+<h3>{{ rater }}</h3>
+<ul>
+  <li>Gender: {{ rater.gender }}</li>
+  <li>Occupation: {{ rater.occupation }}</li>
+  <li>Age Range: {{ rater.age }}</li>
+  <li>Zip: {{ rater.zipcode }}</li>
+</ul>
+<ul>
+  {% for title, movie_id, rating in movies_rated %}
+  <li><a href="/movie/{{ movie_id }}">{{ title }}</a>: {{ rating }}</li>
+  {% endfor %}
+</ul>
+</div>
+{% endblock %}
