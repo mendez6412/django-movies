@@ -1,14 +1,26 @@
 {% extends 'flix/base.html' %}
 {% block body %}
-<div class="col-md-12">
+<div class="row">
+<div class="col-md-6 col-sm-offset-3">
 <h3>{{ movie.title }}</h3>
 Average Rating: {{ avg_rating }}
 </div>
-<iframe name='demo' controls autoplay width='425' height='315' src="https://youtube.com/embed/{{trailer}}"></iframe>
+</div>
+<div class="row">
+<div class="col-sm-6 col-sm-offset-3">
+<div class="embed-responsive embed-responsive-4by3">
+<iframe name='demo' controls src="https://youtube.com/embed/{{trailer}}"></iframe>
+</div>
+</div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
 <ul>
   {% for rating in ratings %}
   <li><a href="/rater/{{ rating.rater_id }}">User: {{ rating.rater_id }}</a>: {{ rating.rating }}</li>
   {% endfor %}
 </ul>
+</div>
+</div>
 
 {% endblock %}

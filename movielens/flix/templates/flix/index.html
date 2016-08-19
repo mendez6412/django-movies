@@ -4,7 +4,7 @@
 <h3> Top 20 Movies </h3>
 <ol>
 {% for id, title, rating in top20 %}
-  <li>({{ id }}) {{ title }}: {{ rating }}</li>
+  <li><a href="movie/{{ id }}">{{ title }}</a>: {{ rating }}</li>
 {% endfor %}
 </ol>
 </div>
