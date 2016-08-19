@@ -1,1 +1,13 @@
+#img1 {
+  background-image: url(http://i.imgur.com/brwbzHn.jpg);
+  margin: 0 auto;
+  width: 100%;
+  height: 1000px;
+  display: block;
+  padding-left: 10px;
+  padding-right: 10px;
+}
 
+#our_navbar {
+  margin-bottom: 0px;
+}

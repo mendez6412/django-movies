@@ -1,11 +1,17 @@
 {% extends 'flix/base.html' %}
 {% block body %}
+<div class="row" id="img1">
+  <div class="col-md-12">
+  </div>
+</div>
 <div class="container">
+<div class="row">
 <h3> Top 20 Movies </h3>
 <ol>
 {% for id, title, rating in top20 %}
   <li><a href="movie/{{ id }}">{{ title }}</a>: {{ rating }}</li>
 {% endfor %}
 </ol>
+</div>
 </div>
 {% endblock %}
