@@ -1,10 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, render_to_response
 from .models import Movie, Rater, Rating
 from django.db.models import Avg, Count
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.db import connection
 from .moresecrets import youtube_search
+from .forms import RaterForm
+from django.contrib.auth.forms import UserCreationForm
 
 def index(request):
     # look @ .values_list
@@ -69,7 +71,21 @@ def signout(request):
 
 
 def register(request):
-    pass
+    if request.method == 'POST':
+        rater_form = RaterForm(request.POST, prefix='rater')
+        user_form = UserCreationForm(request.POST, prefix='user')
+        if rater_form.is_valid() * user_form.is_valid():
+            rater = rater_form.save()
+            user = user_form.save(commit=False)
+            user.rater = user
+            user.save()
+            return HttpResponseRediect('flix/index.html')
+    else:
+        rater_form = RaterForm(prefix='rater')
+        user_form = UserCreationForm(prefix='user')
+        return render_to_response('flix/register.html', dict(raterform=rater_form, userform=user_form))
+
+
     # Here we need 2 forms, a USER CREATION FORM and a RATER CREATION FORM
     # I'll leave this for tomorrow, but it's important and we should all
     # look at this.  -t
