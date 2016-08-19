@@ -1,5 +1,5 @@
 from django import forms
-from .models import Rater
+from .models import Rater, Rating
 
 
 class RaterForm(forms.ModelForm):
@@ -8,3 +8,9 @@ class RaterForm(forms.ModelForm):
     class Meta:
         model = Rater
         fields = ['gender', 'age', 'occupation', 'zipcode']
+
+
+class RatingForm(forms.ModelForms):
+    class Meta:
+        model = Rating
+        fields = ['rating', 'timestamp']
