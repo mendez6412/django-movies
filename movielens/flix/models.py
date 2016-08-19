@@ -29,9 +29,19 @@ class Rater(models.Model):
     zipcode = models.CharField(max_length=20)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 
+    def __str__(self):
+        return '''Rater(gender={}, age={},
+               occupation={}, zipcode={})'''.format(self.gender, self.age,
+                                                    self.occupation, self.zipcode)
+
 
 class Rating(models.Model):
     rater = models.ForeignKey('Rater', on_delete=models.CASCADE)
     movie = models.ForeignKey('Movie', on_delete=models.CASCADE)
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '''Rating(rater={}, movie={},
+               rating={}, timestamp={})'''.format(self.rater, self.movie,
+                                                  self.rating, self.timestamp)
