@@ -98,11 +98,14 @@ def get_new_rating(request, movie_id):
         if request.method == 'POST':
             rating_form = RatingForm(request.POST, prefix='rating')
             if rating_form.is_valid():
-                new_rating = rating_form.save(commit=False)
-                new_rating.rater_id = request.user.id
-                new_rating.movie_id = movie_id
-                new_rating.save()
-                return HttpResponseRedirect('/')
+                if Rating.objects.filter(rater_id=request.user.id).get(movie_id=movie_id):
+                    Rating.objects.filter(rater_id=request.user.id).filter(movie_id=movie_id).update(rating=rating_form)
+                else:
+                    new_rating = rating_form.save(commit=False)
+                    new_rating.rater_id = request.user.id
+                    new_rating.movie_id = movie_id
+                    new_rating.save()
+                    return HttpResponseRedirect('/')
         else:
             rating_form = RatingForm(prefix='rating')
             context = {'rating_form': rating_form}
