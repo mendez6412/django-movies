@@ -106,4 +106,4 @@ def get_new_rating(request, movie_id):
         return HttpResponseRedirect('/register/')
 
 
-temp = Rater.objects.get(user_id=request.user.id).id
+# temp = Rater.objects.get(user_id=request.user.id).id

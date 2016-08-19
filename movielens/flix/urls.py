@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^movie/([0-9]+)/rating$', views.rating, name='rating'),
+    url(r'^movie/([0-9]+)/rating$', views.get_new_rating, name='rating'),
     url(r'^movie/([0-9]+)/$', views.movie, name='movie'),
     url(r'^rater/([0-9]+)/$', views.rater, name='rater'),
     url(r'^login/$', views.signin, name='login'),
