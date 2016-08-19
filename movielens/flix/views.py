@@ -101,6 +101,7 @@ def get_new_rating(request, movie_id):
                 new_rating = rating_form.save(commit=False)
                 new_rating.rater_id = request.user.id
                 new_rating.movie_id = movie_id
+                new_rating.save()
                 return HttpResponseRedirect('/')
         else:
             rating_form = RatingForm(prefix='rating')
