@@ -8,6 +8,7 @@ from .moresecrets import youtube_search
 from .forms import RaterForm
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
+from django.template import RequestContext
 from django.core.urlresolvers import reverse
 
 
@@ -78,15 +79,18 @@ def register(request):
         rater_form = RaterForm(request.POST, prefix='rater')
         user_form = UserCreationForm(request.POST, prefix='user')
         if rater_form.is_valid() * user_form.is_valid():
-            rater = rater_form.save()
             user = user_form.save(commit=False)
-            user.rater = user
             user.save()
-            return HttpResponseRediect('flix/index.html')
+            rater = rater_form.save(commit=False)
+            rater.user_id = user.id
+            rater.id = user.id
+            rater.save()
+            return HttpResponseRedirect('/')
     else:
         rater_form = RaterForm(prefix='rater')
         user_form = UserCreationForm(prefix='user')
-        return render_to_response('flix/register.html', dict(raterform=rater_form, userform=user_form))
+        context = {'raterform': rater_form, 'userform': user_form}
+        return render(request, 'flix/register.html', context)
 
 
     # Here we need 2 forms, a USER CREATION FORM and a RATER CREATION FORM
