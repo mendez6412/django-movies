@@ -30,9 +30,9 @@ class Rater(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return '''Rater(gender={}, age={},
-               occupation={}, zipcode={})'''.format(self.gender, self.age,
-                                                    self.occupation, self.zipcode)
+        return '''Rater(gender={}, age={}, occupation={},
+               zipcode={})'''.format(self.gender, self.age, self.occupation,
+                                     self.zipcode)
 
 
 class Rating(models.Model):
