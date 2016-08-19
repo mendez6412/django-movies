@@ -4,7 +4,7 @@ from django.db.models import Avg, Count
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.db import connection
-
+from .moresecrets import youtube_search
 
 def index(request):
     # look @ .values_list
@@ -25,10 +25,12 @@ def movie(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
     ratings = Rating.objects.filter(movie_id=movie.id)
     avg_rating = round(movie.rating_set.aggregate(Avg('rating'))['rating__avg'], 2)
+    trailer = youtube_search("{} trailer".format(movie.title))[0]
     context = {
         'movie': movie,
         'ratings': ratings,
-        'avg_rating': avg_rating
+        'avg_rating': avg_rating,
+        'trailer': trailer
     }
     return render(request, 'flix/movie.html', context)
 

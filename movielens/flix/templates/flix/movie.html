@@ -4,7 +4,7 @@
 <h3>{{ movie.title }}</h3>
 Average Rating: {{ avg_rating }}
 </div>
-
+<iframe name='demo' controls autoplay width='425' height='315' src="https://youtube.com/embed/{{trailer}}"></iframe>
 <ul>
   {% for rating in ratings %}
   <li><a href="/rater/{{ rating.rater_id }}">User: {{ rating.rater_id }}</a>: {{ rating.rating }}</li>
