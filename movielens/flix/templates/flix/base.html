@@ -36,8 +36,8 @@
             </ul>
             <ul class="nav navbar-right">
               {% if user.is_authenticated %}
-                <li><p class="navbar-text">
-                  Welcome, {{ user.username }}
+                <li><p class="navbar-text" id="username">
+                  Welcome, <a href="/rater/{{user.id}}">{{ user.username }}</a>
                 </p></li>
               {% else %}
                 <li><p class="navbar-text">

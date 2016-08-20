@@ -36,6 +36,10 @@
   width: auto;
 }
 
+#username>a {
+  color: white;
+}
+
 #title {
   opacity: .75;
   text-align: center;
