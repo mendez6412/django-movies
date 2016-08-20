@@ -125,7 +125,7 @@ def get_new_rating(request, movie_id):
                                                 movie_id=movie_id,
                                                 rater_id=request.user.id,
                                                 defaults={'rating': new_rating})
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect('/rater/{}'.format(request.user.id))
         else:
             rating_form = RatingForm(prefix='rating')
         context = {'rating_form': rating_form}
