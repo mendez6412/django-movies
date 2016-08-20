@@ -22,6 +22,9 @@
 }
 
 #title {
+  opacity: .75;
   text-align: center;
-  vertical-align: middle;
+  position: relative;
+  top: 30%;
+  color: #fff;
 }
