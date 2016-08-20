@@ -10,8 +10,10 @@
 </ul>
 <ul>
   {% for title, movie_id, rating in movies_rated %}
-  <li><a href="/movie/{{ movie_id }}">{{ title }}</a>: {{ rating }}   <a href='/movie/{{ movie_id }}/rating'>Edit Movie Rating</a></li>
-
+  <li><a href="/movie/{{ movie_id }}">{{ title }}</a>: {{ rating }}
+    {% if user.id == rater.id %}
+    <a href='/movie/{{ movie_id }}/rating'>Edit Movie Rating</a></li>
+    {% endif %}
   {% endfor %}
 </ul>
 </div>
