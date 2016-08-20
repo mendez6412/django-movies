@@ -30,13 +30,22 @@ def index(request):
     # django debug toolbar, extensions, ODO
     else:
         cur = connection.cursor()
-        cur.execute('SELECT movie_id, AVG(rating) as a FROM flix_rating GROUP BY movie_id HAVING COUNT (movie_id) > 20ORDER BY a DESC;')
+        cur.execute('SELECT movie_id, AVG(rating) as a FROM flix_rating GROUP BY movie_id HAVING COUNT (movie_id) > 20 ORDER BY a DESC;')
         top20 = cur.fetchmany(20)
         temp = []
         for item in top20:
             movie = Movie.objects.get(id=item[0])
             temp.append((movie.id, movie.title, round(item[1], 2)))
-        context = {'top20': temp}
+        cur.execute('SELECT movie_id, COUNT(movie_id) as a FROM flix_rating GROUP BY movie_id ORDER BY a DESC;')
+        top_rated = cur.fetchmany(20)
+        freq = []
+        for item in top_rated:
+            movie = Movie.objects.get(id=item[0])
+            freq.append((movie.id, movie.title, item[1]))
+        context = {
+            'top20': temp,
+            'toprated': freq,
+            }
         return render(request, 'flix/index.html', context)
 
 

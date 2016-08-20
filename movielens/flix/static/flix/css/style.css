@@ -1,4 +1,4 @@
-#img1, #img2 {
+#img1, #img2, #img3 {
   background-size: cover;
   background-attachment: fixed;
   margin: 0 auto;
@@ -17,6 +17,10 @@
   background-image: url(http://i.imgur.com/IPxcARM.jpg);
 }
 
+#img3 {
+  background-image: url(http://i.imgur.com/jwkkX0I.jpg);
+}
+
 #our_navbar {
   margin-bottom: 0px;
 }
@@ -30,6 +34,10 @@
   padding-top: 3px;
   padding-right: 5px;
   width: auto;
+}
+
+#username>a {
+  color: white;
 }
 
 #title {
