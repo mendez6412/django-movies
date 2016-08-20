@@ -1,9 +1,11 @@
 {% extends 'flix/base.html' %}
 {% block body %}
-<h3>{{ search }}</h3>
+<h3>Search results for: {{ search }}</h3>
 <ul>
   {% for result in search_results %}
-  <li>{{ result }}</li>
+  <li>
+    <a href="/movie/{{ result.id }}">{{ result }}</a>
+  </li>
   {% endfor %}
 </ul>
 {% endblock %}
