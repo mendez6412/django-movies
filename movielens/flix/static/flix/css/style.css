@@ -21,6 +21,17 @@
   margin-bottom: 0px;
 }
 
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 125%;
+  padding: 12px;
+  padding-top: 3px;
+  padding-right: 5px;
+  width: auto;
+}
+
 #title {
   opacity: .75;
   text-align: center;
