@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Movie, Rater, Rating
 from django.db.models import Avg
 from django.contrib.auth import authenticate, login, logout
@@ -10,19 +10,43 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 
+def search(request, query):
+    if "search" in request.POST:
+        search = request.POST["search"]
+        search_results = Movie.objects.filter(title__icontains=search)[:25]
+        context = {
+            "search": search,
+            "search_results": search_results
+        }
+        return render(request, "flix/search.html", context)
+    else:
+        pass
+
+
 def index(request):
+    if request.POST:
+        return search(request, request.POST["search"])
     # look @ .values_list
     # django debug toolbar, extensions, ODO
-    """ SQL Magic, current clock @ ~600ms... so not quite Google time """
-    cur = connection.cursor()
-    cur.execute('SELECT movie_id, AVG(rating) as a FROM flix_rating GROUP BY movie_id HAVING COUNT (movie_id) > 20ORDER BY a DESC;')
-    top20 = cur.fetchmany(20)
-    temp = []
-    for item in top20:
-        movie = Movie.objects.get(id=item[0])
-        temp.append((movie.id, movie.title, round(item[1], 2)))
-    context = {'top20': temp}
-    return render(request, 'flix/index.html', context)
+    else:
+        cur = connection.cursor()
+        cur.execute('SELECT movie_id, AVG(rating) as a FROM flix_rating GROUP BY movie_id HAVING COUNT (movie_id) > 20ORDER BY a DESC;')
+        top20 = cur.fetchmany(20)
+        temp = []
+        for item in top20:
+            movie = Movie.objects.get(id=item[0])
+            temp.append((movie.id, movie.title, round(item[1], 2)))
+        context = {'top20': temp}
+        return render(request, 'flix/index.html', context)
+
+
+def search_page(request, search, search_results):
+    search_results = search_results
+    context = {
+        "search": search,
+        "search_results": search_results
+    }
+    return render(request, "flix/search.html", context)
 
 
 def movie(request, movie_id):

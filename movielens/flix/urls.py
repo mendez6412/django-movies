@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^rater/([0-9]+)/$', views.rater, name='rater'),
     url(r'^login/$', views.signin, name='login'),
     url(r'^logout/$', views.signout, name='logout'),
-    url(r'^register/$', views.register, name='register')
+    url(r'^register/$', views.register, name='register'),
+    url(r'^search/', views.search_page, name='search')
     ]
