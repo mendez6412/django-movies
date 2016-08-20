@@ -1,14 +1,12 @@
-from django.shortcuts import render, get_object_or_404, render_to_response
+from django.shortcuts import render, get_object_or_404
 from .models import Movie, Rater, Rating
-from django.db.models import Avg, Count
-from django.http import HttpResponse
+from django.db.models import Avg
 from django.contrib.auth import authenticate, login, logout
 from django.db import connection
 from .moresecrets import youtube_search
 from .forms import RaterForm, RatingForm
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
-from django.template import RequestContext
 from django.core.urlresolvers import reverse
 
 
@@ -92,42 +90,18 @@ def register(request):
     context = {'raterform': rater_form, 'userform': user_form}
     return render(request, 'flix/register.html', context)
 
-#
-# def get_new_rating(request, movie_id):
-#     if request.user.is_authenticated:
-#         if request.method == 'POST':
-#             rating_form = RatingForm(request.POST, prefix='rating')
-#             if rating_form.is_valid():
-#                 try:
-#                     old_rating = Rating.objects.filter(rater_id=request.user.id).get(movie_id=movie_id)
-#
-#                 except:
-#                     new_rating = rating_form.save(commit=False)
-#                     new_rating.rater_id = request.user.id
-#                     new_rating.movie_id = movie_id
-#                     new_rating.save()
-#                 return HttpResponseRedirect('/')
-#         else:
-#             rating_form = RatingForm(prefix='rating')
-#             context = {'rating_form': rating_form}
-#             return render(request, 'flix/rating.html', context)
-#     else:
-#         return HttpResponseRedirect('/register/')
-
-
-# temp = Rater.objects.get(user_id=request.user.id).id
-
 
 def get_new_rating(request, movie_id):
     if request.user.is_authenticated:
         if request.method == 'POST':
             rating_form = RatingForm(request.POST, prefix='rating')
-            new_rating = rating_form['rating'].value()
             if rating_form.is_valid():
-                obj, created = Rating.objects.update_or_create(
-                                                              movie_id=movie_id,
-                                                              rater_id=request.user.id,
-                                                              rating=new_rating)
+                new_rating = rating_form['rating'].value()
+                Rating.objects.update_or_create(
+                                                movie_id=movie_id,
+                                                rater_id=request.user.id,
+                                                defaults={'rating': new_rating})
+                return HttpResponseRedirect('/')
         else:
             rating_form = RatingForm(prefix='rating')
         context = {'rating_form': rating_form}
