@@ -48,7 +48,7 @@ class Rating(models.Model):
     movie = models.ForeignKey('Movie', on_delete=models.CASCADE)
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     timestamp = models.DateTimeField(auto_now=True)
-    review = models.CharField(max_length=250, null=True)
+    review = models.TextField(max_length=250, null=True)
 
     def __str__(self):
         return '''Rating(rater={}, movie={},
