@@ -165,10 +165,12 @@ def get_new_rating(request, movie_id):
             rating_form = RatingForm(request.POST, prefix='rating')
             if rating_form.is_valid():
                 new_rating = rating_form['rating'].value()
+                new_review = rating_form['review'].value()
                 Rating.objects.update_or_create(
                                                 movie_id=movie_id,
                                                 rater_id=request.user.id,
-                                                defaults={'rating': new_rating})
+                                                defaults={'rating': new_rating,
+                                                          'review': new_review})
                 return HttpResponseRedirect('/rater/{}'.format(request.user.id))
         else:
             rating_form = RatingForm(prefix='rating')
