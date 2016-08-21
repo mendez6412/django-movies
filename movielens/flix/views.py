@@ -61,6 +61,8 @@ def search_page(request, search, search_results):
 
 
 def genres(request, genre_name):
+    if request.POST:
+        return search(request, request.POST["search"])
     genre = get_object_or_404(Genre, genre=genre_name)
     genre_movies = genre.movie_set.all()
     genrefreq = genre_movies.annotate(rating_count=Count('rating')).filter(rating_count__gte=20)
