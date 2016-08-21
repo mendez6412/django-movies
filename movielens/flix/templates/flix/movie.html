@@ -1,12 +1,15 @@
 {% extends 'flix/base.html' %}
 {% block body %}
+<div class="container">
 <div class="row">
-<div class="col-md-6">
+<div class="col-md-12">
 <h3>{{ movie.title }}</h3>
 Average Rating: {{ avg_rating }}<br>
 <a href='/movie/{{ movie.id }}/rating'>Rate This Movie</a>
 </div>
 </div>
+</div>
+<div class="container">
 <div class="row">
 <div class="col-md-6">
 <div class="embed-responsive embed-responsive-4by3">
@@ -35,6 +38,7 @@ Average Rating: {{ avg_rating }}<br>
   <li><a href="/rater/{{ rating.rater_id }}">User: {{ rating.rater_id }}</a>: {{ rating.rating }}</li>
   {% endfor %}
 </ul> -->
+</div>
 </div>
 </div>
 

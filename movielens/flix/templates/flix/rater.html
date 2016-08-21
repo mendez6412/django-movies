@@ -1,14 +1,25 @@
 {% extends 'flix/base.html' %}
 {% block body %}
-<div class='row'>
+<div class="container">
+  <div class="row">
+    <br>
+  </div>
+</div>
+<div class="container">
+<div class='row' id="topofdetail">
 <div class="col-md-6">
-<h3>{{ rater.user.username }}</h3>
-<ul>
-  <li>Gender: {{ rater.gender }}</li>
-  <li>Occupation: {{ rater.occupation }}</li>
-  <li>Age Range: {{ rater.age }}</li>
-  <li>Zip: {{ rater.zipcode }}</li>
-</ul>
+  <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{ rater.user.username }}</h3>
+  </div>
+  <div class="panel-body">
+    <ul>
+      <li>Gender: {{ rater.gender }}</li>
+      <li>Occupation: {{ rater.occupation }}</li>
+      <li>Age Range: {{ rater.age }}</li>
+      <li>Zip: {{ rater.zipcode }}</li>
+    </ul>  </div>
+</div>
 </div>
 <div class="col-md-6">
 <h3>Recommended Movies</h3>
@@ -30,6 +41,8 @@
 </table>
 </div>
 </div>
+</div>
+<div class='container'>
 <div class='row'>
 <div class='col-md-12'>
 <h3>Movies Watched</h3>
