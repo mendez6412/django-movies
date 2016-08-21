@@ -1,11 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
-<<<<<<< HEAD
 from .models import Movie, Rater, Rating, Genre
 from django.db.models import Avg
-=======
 from .models import Movie, Rater, Rating
 from django.db.models import Avg, Count
->>>>>>> bcb3ae310282549bf3797af7b61d8f36f35da558
 from django.contrib.auth import authenticate, login, logout
 from django.db import connection
 from .moresecrets import youtube_search
