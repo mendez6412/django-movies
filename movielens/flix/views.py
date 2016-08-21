@@ -1,6 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
+<<<<<<< HEAD
 from .models import Movie, Rater, Rating, Genre
 from django.db.models import Avg
+=======
+from .models import Movie, Rater, Rating
+from django.db.models import Avg, Count
+>>>>>>> bcb3ae310282549bf3797af7b61d8f36f35da558
 from django.contrib.auth import authenticate, login, logout
 from django.db import connection
 from .moresecrets import youtube_search
@@ -91,9 +96,15 @@ def rater(request, rater_id):
         for movie in ratings:
             title = Movie.objects.get(id=movie.movie_id)
             movies_rated.append((title, movie.movie_id, movie.rating))
+
+        unseen = Movie.objects.exclude(rating__rater_id=rater_id)
+        most_unseen = unseen.annotate(rating_count=Count('rating')).filter(rating_count__gte=20)
+        top_unseen = most_unseen.annotate(avg=Avg('rating__rating')).order_by('-avg')[:20]
+
         context = {
             'rater': rater,
-            'movies_rated': movies_rated
+            'movies_rated': movies_rated,
+            'top_unseen': top_unseen
         }
         return render(request, 'flix/rater.html', context)
 
