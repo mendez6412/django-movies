@@ -11,6 +11,8 @@ class RaterForm(forms.ModelForm):
 
 
 class RatingForm(forms.ModelForm):
+    review = forms.CharField(widget=forms.Textarea)
+
     class Meta:
         model = Rating
         fields = ['rating', 'review']
