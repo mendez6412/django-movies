@@ -7,3 +7,4 @@ This project was designed to introduce the process of making a Django project an
 * ```pip install -r requirements2.txt```
 * Make sure you have a PostgreSQL database named ```movielens```
 * ```python manage.py migrate``` (This will take several minutes due to the size of the files.)
+* Create a file named ```secrets.py``` in your project folder with your specific DATABASES information and your SECRET_KEY
