@@ -1,7 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Movie, Rater, Rating, Genre
-from django.db.models import Avg
-from .models import Movie, Rater, Rating
 from django.db.models import Avg, Count
 from django.contrib.auth import authenticate, login, logout
 from django.db import connection
