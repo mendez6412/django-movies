@@ -45,12 +45,38 @@
                 </p></li>
               {% endif %}
             </ul>
+            <ul class="nav navbar-right">
+              <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Genres <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/genres/Action">Action</a></li>
+                <li><a href="/genres/Adventure">Adventure</a></li>
+                <li><a href="/genres/Animation">Animation</a></li>
+                <li><a href="/genres/Children's">Children's</a></li>
+                <li><a href="/genres/Comedy">Comedy</a></li>
+                <li><a href="/genres/Crime">Crime</a></li>
+                <li><a href="/genres/Documentary">Documentary</a></li>
+                <li><a href="/genres/Drama">Drama</a></li>
+                <li><a href="/genres/Fantasy">Fantasy</a></li>
+                <li><a href="/genres/Film-Noir">Film-Noir</a></li>
+                <li><a href="/genres/Horror">Horror</a></li>
+                <li><a href="/genres/Musical">Musical</a></li>
+                <li><a href="/genres/Mystery">Mystery</a></li>
+                <li><a href="/genres/Romance">Romance</a></li>
+                <li><a href="/genres/Sci-Fi">Sci-Fi</a></li>
+                <li><a href="/genres/Thriller">Thriller</a></li>
+                <li><a href="/genres/War">War</a></li>
+                <li><a href="/genres/Western">Western</a></li>
+              </ul>
+            </li>
+            </ul>
         </div><!--/.container-fluid -->
     </nav>
     {% block body %}
     {% endblock %}
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="{% static 'flix/js/app.js' %}"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
   </body>

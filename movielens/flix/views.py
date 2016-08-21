@@ -60,9 +60,13 @@ def search_page(request, search, search_results):
     return render(request, "flix/search.html", context)
 
 
-def genres(request, genre):
-    genre = get_object_or_404(Genre, genre=genre)
-    context = {'genres': genre}
+def genres(request, genre_name):
+    genre = get_object_or_404(Genre, genre=genre_name)
+    genre_movies = genre.movie_set.all()
+    genrefreq = genre_movies.annotate(rating_count=Count('rating')).filter(rating_count__gte=20)
+    topgenre = genrefreq.annotate(avg=Avg('rating__rating')).order_by('-avg')[:20]
+    context = {'genre': genre,
+               'top': topgenre}
     return render(request, 'flix/genres.html', context)
 
 
