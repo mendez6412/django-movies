@@ -1,0 +1,14 @@
+{% extends 'flix/base.html' %}
+
+{% block body %}
+{% for genre in genres %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>{{ genre }}</h3>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}

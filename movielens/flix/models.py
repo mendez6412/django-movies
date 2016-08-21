@@ -3,9 +3,17 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
+class Genre(models.Model):
+    genre = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.genre
+
+
 class Movie(models.Model):
     title = models.CharField(max_length=240)
     genre = models.CharField(max_length=240)
+    genres = models.ManyToManyField(Genre)
 
     def __str__(self):
         return self.title

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Movie, Rater, Rating
+from .models import Movie, Rater, Rating, Genre
 from django.db.models import Avg
 from django.contrib.auth import authenticate, login, logout
 from django.db import connection
@@ -56,6 +56,12 @@ def search_page(request, search, search_results):
         "search_results": search_results
     }
     return render(request, "flix/search.html", context)
+
+
+def genres(request, genre):
+    genre = get_object_or_404(Genre, genre=genre)
+    context = {'genres': genre}
+    return render(request, 'flix/genres.html', context)
 
 
 def movie(request, movie_id):
