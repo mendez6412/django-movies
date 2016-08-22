@@ -1,13 +1,22 @@
 {% extends 'flix/base.html' %}
 {% block body %}
+<div class="container">
   <div class="row">
-  <div class="col-sm-6">
-    <form method="post" action="">
+  <div class="col-md-8">
+  <form method="post" action="">
   {% csrf_token %}
-  {{ userform.as_ul }}
-  {{ raterform.as_ul }}
+  <fieldset>
+    <legend>Register</legend>
+    <div class="form-group">
+      {{ userform.as_p }}
+    </div>
+    <div class="form-group">
+      {{ raterform.as_p }}
+    </div>
   <button type="submit" class="btn btn-default">Submit</button>
+  </fieldset>
   </form>
+</div>
 </div>
 </div>
 
