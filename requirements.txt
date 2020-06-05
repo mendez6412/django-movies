@@ -1,4 +1,4 @@
-Django==1.10
+Django==1.11.29
 psycopg2==2.6.2
 apiclient==1.0.3
 google-api-python-client==1.5.2
